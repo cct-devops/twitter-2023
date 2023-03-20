@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 import jwt
-from datetime import datetime
+from time import time
 import os
 
 app = Flask(__name__)
@@ -19,9 +19,11 @@ users = [
 ]
 
 def generate_jwt_token(username):
+    seconds_now = time()
     return jwt.encode(
         {   "username": username, 
-            "iat": datetime.timestamp(datetime.now()),
+            "iat": seconds_now,
+            "exp": seconds_now + 300
         },
         os.environ.get('JWT_SECRET'),
         algorithm="HS256"
