@@ -23,7 +23,7 @@ def generate_jwt_token(username):
     return jwt.encode(
         {   "username": username, 
             "iat": seconds_now,
-            "exp": seconds_now + 300
+            "exp": seconds_now + 30000
         },
         os.environ.get('JWT_SECRET'),
         algorithm="HS256"
