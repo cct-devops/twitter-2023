@@ -43,4 +43,4 @@ if __name__ == '__main__':
     if not os.environ.get('JWT_SECRET'):
         print("No JWT_SECRET variable found")
         exit(1)
-    app.run()
+    app.run(host='0.0.0.0')
