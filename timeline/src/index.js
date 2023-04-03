@@ -1,4 +1,7 @@
 import Fastify from 'fastify';
+import { existsInCache, saveInCache } from './cache.js';
+import { getTimelineFor } from './mysql.js';
+import { userReadTimeline } from './stats/index.js';
 import { isTokenValid } from './util.js';
 
 const app = Fastify({
@@ -14,10 +17,18 @@ app.get('/timeline', async (request, response) => {
     if(!isTokenValid(tokenHeader)) {
         return response.status(401).send({message: 'Unauthorized'});
     }
-
-    // Here we know the token is correct, so we can do our business logic
-    console.log('-------------------', token);
-    return "hello!"
+    userReadTimeline('dagonza'); // TODO get this from the token
+    // connect here....
+    const cache = await existsInCache('dagonza');
+    if (cache) {
+        app.log.info('This is being served from the cache');
+        return JSON.parse(cache);
+    } else {
+        const result = await getTimelineFor('dagonza'); //TODO see how we get the user from the JWT token.
+        app.log.info('This is being served from the database');
+        saveInCache('dagonza', result);
+        return result;
+    }
 });
 
 
