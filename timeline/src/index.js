@@ -1,7 +1,11 @@
 import Fastify from 'fastify';
+<<<<<<< HEAD
 import { existsInCache, saveInCache } from './cache.js';
 import { getTimelineFor } from './mysql.js';
 import { userReadTimeline } from './stats/index.js';
+=======
+import { getTimelineFor } from './mysql.js';
+>>>>>>> 475c52744023e7ecaa46f5c55efded3288bd714d
 import { isTokenValid } from './util.js';
 
 const app = Fastify({
@@ -9,13 +13,13 @@ const app = Fastify({
 });
 
 app.get('/timeline', async (request, response) => {
-    
+
     // the token is in a header called Authorization
     const tokenHeader = request.headers['authorization'];
 
     // token has the structure of "bearer <token>". We only want <token>
-    if(!isTokenValid(tokenHeader)) {
-        return response.status(401).send({message: 'Unauthorized'});
+    if (!isTokenValid(tokenHeader)) {
+        return response.status(401).send({ message: 'Unauthorized' });
     }
     userReadTimeline('dagonza'); // TODO get this from the token
     // connect here....
@@ -31,6 +35,5 @@ app.get('/timeline', async (request, response) => {
     }
 });
 
-
-await app.listen({port: 8081, host: '0.0.0.0'});
+await app.listen({ port: 8081, host: '0.0.0.0' });
 app.log.info('Fastify server started');

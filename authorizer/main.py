@@ -23,7 +23,7 @@ def generate_jwt_token(username):
     return jwt.encode(
         {   "username": username, 
             "iat": seconds_now,
-            "exp": seconds_now + 300
+            "exp": seconds_now + 30000
         },
         os.environ.get('JWT_SECRET'),
         algorithm="HS256"
@@ -43,4 +43,4 @@ if __name__ == '__main__':
     if not os.environ.get('JWT_SECRET'):
         print("No JWT_SECRET variable found")
         exit(1)
-    app.run()
+    app.run(host='0.0.0.0')

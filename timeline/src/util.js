@@ -7,10 +7,10 @@ export function isTokenValid(tokenHeader) {
     if (!token) { return false };
     // validate the token: time and all that jazz.
     try {
-        // TODO David: Next class, verify that this works.
         jwt.verify(token, process.env.JWT_SECRET);
         return true;
     } catch(e) {
+        console.log(e);
         return false;
     }
 }
