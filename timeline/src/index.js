@@ -1,11 +1,7 @@
 import Fastify from 'fastify';
-<<<<<<< HEAD
 import { existsInCache, saveInCache } from './cache.js';
 import { getTimelineFor } from './mysql.js';
 import { userReadTimeline } from './stats/index.js';
-=======
-import { getTimelineFor } from './mysql.js';
->>>>>>> 475c52744023e7ecaa46f5c55efded3288bd714d
 import { isTokenValid } from './util.js';
 
 const app = Fastify({
