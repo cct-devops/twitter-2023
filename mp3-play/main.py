@@ -17,16 +17,17 @@ def play_song(song_name):
 def serve_ui():
     with open('./index.html') as f:
         return Response(f.read(), mimetype="text/html")
-    
 
 # POST
 @app.route('<playlist_name>', methods = ["POST"])
 def create_playlist(playlist_name):
+    # Make sure the user has a valid token (in all the endpoints)
     pass # insert a row in the playlists table.
 
 # PUT
 @app.route('<playlist_name>', methods=["PUT"])
 def add_song_to_playlist(playlist_name):
+    # Make sure the user has a valid token (in all the endpoints)
     song = request.args.get('song')
     print(f"adding song {song} into the playlist {playlist_name}")
     pass
