@@ -10,6 +10,4 @@ export function isTokenValid(tokenHeader) {
         throw new Error('Token not present');
     }
     return jwt.verify(token, process.env.JWT_SECRET);
-        
-    
 }
